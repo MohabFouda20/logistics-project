@@ -35,14 +35,21 @@ class clientData(models.Model):
     ("Kafr El Sheikh", "Kafr El Sheikh"),
     ("Damietta", "Damietta")
     ]
+    shipper = models.ForeignKey(shipper, on_delete=models.CASCADE, null=False, blank=True)
+    name = models.CharField(max_length=100, null=False)
+    phone = models.CharField(max_length=11, null=False)
+    apartment = models.CharField(max_length=20, null=True, blank=True)
+    building_number = models.IntegerField(null=True, blank=True)
+    streetName = models.CharField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=100, null=True, blank=True)
+    # government = models.CharField(max_length=100, null=False, choices=egypt_governorates)
+    government = models.CharField(max_length=100, null=True, choices=egypt_governorates)
+
     
-    shipper_id = models.ForeignKey(shipper, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100 , null = False)
-    phone = models.CharField(max_length=11 , null = False)
-    apartment = models.CharField(max_length=20 , null= True , blank= True)
-    building_number = models.IntegerField(null  = True , blank= True)
-    streetName = models.CharField(max_length=100 , null= True , blank= True)
-    city = models.CharField(max_length=100 , null= True , blank= True)
-    government =models.CharField(max_length=100 , null=False , choices=egypt_governorates)
+    # Add default value for content field
+    content = models.CharField(max_length=200, null=True, default="")
+
+    cod = models.FloatField(max_length=5, null=False, default=0)
+    condition = models.BooleanField(choices=[(True, 'Delivered'), (False, 'Not Delivered')], default=False)
     
     
